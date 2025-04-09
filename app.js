@@ -1,10 +1,6 @@
-/*let title = document.querySelector('h1');
-title.innerHTML = 'Jogo fo número secreto';
-
-let paragrafo = document.querySelector('p');
-paragrafo.innerHTML = 'Escolha entre 1 e 10';*/
-
-let numeroSecreto =  gerarNumeroAleatorio();
+let listaNumerosSorteados = []; //array
+let numeroLimite = 10;
+let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
 
 function exibirTexto(tag, texto){ //function com parametros
@@ -43,7 +39,19 @@ function verificarChute(){ //function sem parametro
 }
 
 function gerarNumeroAleatorio(){
-    return parseInt(Math.random() * 10 + 1); //vda retorno do math
+    let numeroEscolhido = parseInt(Math.random() * 3 + 1); //da retorno do math
+    let qtdElementosNaLista = listaNumerosSorteados.length;
+
+    if(qtdElementosNaLista == numeroLimite){
+        listaNumerosSorteados = [];
+    }
+    if (listaNumerosSorteados.includes(numeroEscolhido)){ //includes ve se esta incluido, nesse caso ve se esta incluido o numero escolhido na lista de numeros sorteados
+        return gerarNumeroAleatorio(); 
+    } else {
+        listaNumerosSorteados.push(numeroEscolhido); //push coloca, nesse caso coloca o numero escolhido na lista
+        console.log(listaNumerosSorteados);
+        return numeroEscolhido;
+    }
 }
 
 function limparCampo(){
